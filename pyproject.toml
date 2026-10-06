@@ -10,13 +10,13 @@ requires-python = ">=3.12,<3.13"
 license = {text = "Apache-2.0"}
 dependencies = [
   "numpy==2.2.6", "scipy==1.15.3", "scikit-learn==1.6.1",
-  "torch==2.7.1", "transformers==4.51.3", "peft==0.15.2",
+  "torch==2.13.0", "transformers==5.10.1", "peft==0.15.2",
   "safetensors==0.5.3", "huggingface-hub==0.30.2",
-  "sentence-transformers==4.1.0", "filelock==4.0.6"
+  "sentence-transformers==5.6.0", "filelock==4.0.6"
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==8.3.5"]
+dev = ["pytest==9.0.3"]
 reports = ["matplotlib==3.10.3"]
 
 [tool.setuptools.packages.find]
