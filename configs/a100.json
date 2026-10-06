@@ -1,0 +1,86 @@
+{
+  "experiment": "jev-recovery-router-v0.1-a100",
+  "model": {
+    "name": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "max_length": 512,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05
+  },
+  "training": {
+    "seed": 42,
+    "epochs": 2,
+    "micro_batch_size": 8,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 0.0002,
+    "max_seconds": 10800,
+    "shuffle_candidates": true,
+    "checkpoint_steps": 100
+  },
+  "retrieval": {
+    "backend": "minilm",
+    "initial_k": 1,
+    "expanded_k": 5,
+    "saturation_control": [
+      5,
+      20
+    ],
+    "saturation_control_kind": "retrieval-only diagnostic; wider model-head positions are not trained in the primary run"
+  },
+  "policy": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "steps": 1000,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "entropy_weight": 0.005,
+    "target_oos_prior": 0.18181818181818182,
+    "wrong_costs": [
+      2.0,
+      5.0,
+      10.0
+    ],
+    "defer_costs": [
+      0.1,
+      0.2,
+      0.4
+    ],
+    "expand_costs": [
+      0.01,
+      0.05,
+      0.15
+    ],
+    "primary_cost": {
+      "correct": 1.0,
+      "wrong": 5.0,
+      "defer": 0.2,
+      "expand": 0.05
+    },
+    "heldout_cost": {
+      "correct": 1.0,
+      "wrong": 7.0,
+      "defer": 0.3,
+      "expand": 0.08
+    }
+  },
+  "evaluation": {
+    "bootstrap_samples": 1000,
+    "seed": 2026,
+    "ece_bins": 10
+  },
+  "budget": {
+    "max_elapsed_hours": 12.0,
+    "max_usd": 100.0,
+    "gpu_usd_per_hour": 3.18,
+    "incidentals_usd": 5.0,
+    "assumed_tax_multiplier": 1.2
+  },
+  "pilot": {
+    "optimizer_steps": 50,
+    "max_seconds": 600
+  }
+}
